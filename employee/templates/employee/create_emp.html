@@ -1,0 +1,143 @@
+{% extends "pizzas/base.html" %}
+{% block content %}
+<h3>{{title}}</h3>
+
+<form class="form-horizontal" action="/employee/{{url}}/" method="POST">
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label for="fname" class="col-sm-2 control-label">First Name <span
+                        class="text-danger"> * </span></label>
+                <div class="col-sm-6">
+                    <input type="text" id="fname" name="fname" class="form-control" value="{{single.0.firstname}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="lname" class="col-sm-2 control-label">Last Name <span class="text-danger"> * </span></label>
+                <div class="col-sm-6">
+                    <input type="text" id="lname" name="lname" class="form-control"  value="{{single.0.lastname}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-6">
+                    <input type="text" id="email" name="email" class="form-control" value="{{single.0.email}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="col-sm-2 control-label">Phone <span class="text-danger"> * </span></label>
+                <div class="col-sm-6">
+                    <input type="text" id="phone" name="phone" class="form-control" value="{{single.0.phone}}">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label for="jtitle" class="col-sm-2 control-label">Job Title </label>
+                <div class="col-sm-6">
+                    <select id="jtitle" name="jtitle" class="form-control">
+                        {% if single.0.job_title == "Waiter" %}
+                        <option value="Waiter" selected>Waiter</option>
+                        <option value="Cashier" >Cashier</option>
+                        <option value="Cook" >Cook</option>
+                         <option value="Manager">Manager</option>
+
+                        {% elif single.0.job_title == "Cashier" %}
+                        <option value="Waiter" >Waiter</option>
+                         <option value="Cashier" selected>Cashier</option>
+                        <option value="Cook" >Cook</option>
+                         <option value="Manager">Manager</option>
+
+                        {% elif single.0.job_title == "Cook" %}
+                        <option value="Waiter" >Waiter</option>
+                         <option value="Cashier" >Cashier</option>
+                        <option value="Cook" selected>Cook</option>
+                         <option value="Manager">Manager</option>
+
+                        {% elif single.0.job_title == "Manager" %}
+                        <option value="Waiter" >Waiter</option>
+                         <option value="Cashier" >Cashier</option>
+                        <option value="Cook" >Cook</option>
+                         <option value="Manager" selected>Manager</option>
+
+                        {% else %}
+                         <option value="Waiter" >Waiter</option>
+                         <option value="Cashier" >Cashier</option>
+                        <option value="Cook" >Cook</option>
+                         <option value="Manager">Manager</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="hrlyrate" class="col-sm-2 control-label">Hourly Rate <span
+                        class="text-danger"> * </span></label>
+                <div class="col-sm-6">
+
+                    <input type="text" id="hrlyrate" name="hrlyrate" class="form-control" value="{{single.0.hourly_rate}}">
+                     <input type="hidden" id="id" name="id" class="form-control" value="{{single.0.id}}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="worktype" class="col-sm-2 control-label">Work Type</label>
+                <div class="col-sm-6">
+                    <select id="worktype" name="worktype" class="form-control">
+                        {% if single.0.worktype == "Part-Time" %}
+                        <option value="Part-Time" selected>Part Time</option>
+                        <option value="Contract">Contract</option>
+                         <option value="Full-Time">Full Time</option>
+
+                        {% elif single.0.worktype == "Contract" %}
+                        <option value="Part-Time">Part Time</option>
+                        <option value="Contract" selected>Contract</option>
+                         <option value="Full-Time">Full Time</option>
+
+                        {% elif single.0.worktype == "Full-Time" %}
+                         <option value="Part-Time">Part Time</option>
+                        <option value="Contract">Contract</option>
+                         <option value="Full-Time" selected>Full Time</option>
+                        {% else %}
+
+                        <option value="Part-Time">Part Time</option>
+                        <option value="Contract">Contract</option>
+                         <option value="Full-Time">Full Time</option>
+                        {% endif %}
+
+
+                    </select>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-sm-2 control-label">Address</label>
+                <div class="col-sm-6">
+                    <textarea id="address" name="address" class="form-control" rows="5" >{{single.0.address}}</textarea>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">{{title}}</button>
+        </div>
+    </div>
+</form>
+{% if error != None %}
+<div class="alert alert-danger" role="alert">{{error}}</div>
+{% endif %}
+
+
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends "pizzas/base.html" %}
+{% block content %}
+<h3>All Employees</h3>
+
+<table class="table table-hover table-bordered">
+
+    <thead>
+
+    <tr>
+        <th>#</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Job Title</th>
+        <th>Work Type</th>
+        <th>Hourly Rate</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Start Date</th>
+        <th>Edit / Delete</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+
+
+    {% for message in message %}
+
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{message.firstname}}</td>
+        <td>{{message.lastname}}</td>
+        <td>{{message.job_title}}</td>
+        <td>{{message.worktype}}</td>
+        <td>{{message.hourly_rate}}</td>
+        <td>{{message.email}}</td>
+        <td>{{message.phone}}</td>
+        <td>{{message.address}}</td>
+        <td>{{message.date_added}}</td>
+        <td><a href="/employee/edit employee/{{message.id}}" class="btn btn-info btn-sm"><i
+                class="glyphicon glyphicon-pencil"></i></a> &nbsp;&nbsp; |&nbsp;&nbsp; <a
+                href="/employee/delete employee/{{message.id}}" class="btn btn-danger btn-sm"><i
+                class="glyphicon glyphicon-trash"></i></a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+Total Number of Employee : <strong>{{message|length}}</strong>
+
+{% if error != None %}
+<div class="alert alert-danger" role="alert">{{error}}</div>
+{% endif %}
+
+
+{% endblock content %}
